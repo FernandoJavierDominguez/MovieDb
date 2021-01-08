@@ -1,6 +1,7 @@
 package com.fernandodominguezpacheco.moviedb.framework.db
 
 import androidx.room.Database
+import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
@@ -8,7 +9,7 @@ import androidx.room.TypeConverters
     version = 1
 )
 @TypeConverters(Converters::class)
-abstract class MovieDb {
+abstract class MovieDb : RoomDatabase() {
 
     abstract fun actorDao(): ActorDao
 
