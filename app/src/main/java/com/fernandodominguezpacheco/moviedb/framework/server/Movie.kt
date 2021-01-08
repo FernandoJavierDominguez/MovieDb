@@ -15,6 +15,7 @@ data class Movie(
     @SerializedName("overview") val overview: String,
     @SerializedName("release_date") val release_date : Date,
     @SerializedName("poster_path") val poster_path: String,
-    @SerializedName("id") val status: String
+    @SerializedName("status") val status: String,
+    @SerializedName("genres") val genres: List<Genre>
 ) {
 }

@@ -3,8 +3,11 @@ package com.fernandodominguezpacheco.moviedb.framework
 
 import com.fernandodominguezpacheco.moviedb.domain.*
 import com.fernandodominguezpacheco.moviedb.framework.db.Movie as RoomMovie
+import com.fernandodominguezpacheco.moviedb.framework.server.Movie  as ServerMovie
 import com.fernandodominguezpacheco.moviedb.framework.db.Actor as RoomActor
+import com.fernandodominguezpacheco.moviedb.framework.server.Actor  as ServerActor
 import com.fernandodominguezpacheco.moviedb.framework.db.Genre as RoomGenre
+import com.fernandodominguezpacheco.moviedb.framework.server.Genre  as ServerGenre
 import com.fernandodominguezpacheco.moviedb.framework.db.MovieActor as RoomMovieActor
 import com.fernandodominguezpacheco.moviedb.framework.db.MovieGenre as RoomMovieGenre
 import com.fernandodominguezpacheco.moviedb.framework.db.MovieWithActorsAndGenres
@@ -26,6 +29,21 @@ fun MovieWithActorsAndGenres.toMovie() : Movie = Movie(
     movie.status,
     actors.map { it.toActor() },
     genres.map { it.toGenre() }
+)
+
+fun ServerMovie.toMovie(): Movie = Movie(
+    id,
+    title,
+    original_language,
+    vote_average,
+    vote_count,
+    imdbId,
+    popularity,
+    homepage,
+    overview,
+    release_date,
+    poster_path,
+    status
 )
 
 fun Movie.toRoomMovie(): RoomMovie = RoomMovie(
@@ -52,6 +70,14 @@ fun RoomActor.toActor(): Actor = Actor(
     character
 )
 
+fun ServerActor.toActor(): Actor = Actor(
+    id,
+    name,
+    popularity,
+    profile_path,
+    character
+)
+
 fun Actor.toRoomActor(): RoomActor = RoomActor(
     id,
     name,
@@ -59,11 +85,19 @@ fun Actor.toRoomActor(): RoomActor = RoomActor(
     urlImage,
     character
 )
+
+
 //Genre
 fun RoomGenre.toGenre(): Genre = Genre(
     id,
     name
 )
+
+fun ServerGenre.toGenre(): Genre = Genre(
+    id,
+    name
+)
+
 fun Genre.toRoomGenre(): RoomGenre = RoomGenre(
     id,
     name
