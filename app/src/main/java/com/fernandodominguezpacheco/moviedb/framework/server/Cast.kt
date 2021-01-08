@@ -2,7 +2,7 @@ package com.fernandodominguezpacheco.moviedb.framework.server
 
 import com.google.gson.annotations.SerializedName
 
-data class Genre (
+data class Cast (
     @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-)
+    @SerializedName("cast") val list: List<Actor>
+    )
