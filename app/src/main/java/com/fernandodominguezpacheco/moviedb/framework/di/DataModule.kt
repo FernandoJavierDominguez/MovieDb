@@ -19,8 +19,10 @@ class DataModule {
         remoteMovieDataSource: RemoteMovieDataSource,
         localMovieActorDataSource: LocalMovieActorDataSource,
         localMovieGenreDataSource: LocalMovieGenreDataSource,
+        actorRepository: ActorRepository,
+        genreRepository: GenreRepository,
         apiKey: String,
-        language: String ) = MovieRepository(localMovieDataSource, remoteMovieDataSource, localMovieActorDataSource, localMovieGenreDataSource, apiKey, language)
+        language: String ) = MovieRepository(localMovieDataSource, remoteMovieDataSource, localMovieActorDataSource, localMovieGenreDataSource, actorRepository, genreRepository, apiKey, language)
 
     @Provides
     fun actorRepositoryProvider(

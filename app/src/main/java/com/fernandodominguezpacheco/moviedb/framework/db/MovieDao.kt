@@ -15,7 +15,7 @@ interface MovieDao {
     @Transaction @Query("SELECT * FROM Movie")
     fun getAllMoviesWithActorsAndGenre() : Flow<List<MovieWithActorsAndGenres>>
 
-    @Query("SELECT COUNT(id) FROM Movie")
+    @Query("SELECT COUNT(movieId) FROM Movie")
     suspend fun movieCount() : Int
 
 

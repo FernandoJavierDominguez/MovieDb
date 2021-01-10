@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity
 data class Movie(
-    @PrimaryKey (autoGenerate = false) val id: Int,
+    @PrimaryKey (autoGenerate = false) val movieId: Int,
     val title: String,
     val original_language: String,
     val vote_average: Double,

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Actor (
-    @PrimaryKey(autoGenerate = false) val id: Int,
+    @PrimaryKey(autoGenerate = false) val actorId: Int,
     val name: String,
     val popularity: Double,
     val urlImage: String,

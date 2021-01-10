@@ -12,13 +12,20 @@ class MovieRepository(
     private val remoteMovieDataSource: RemoteMovieDataSource,
     private val localMovieActorDataSource: LocalMovieActorDataSource,
     private val localMovieGenreDataSource: LocalMovieGenreDataSource,
+    private val actorRepository: ActorRepository,
+    private val genreRepository: GenreRepository,
     private val apiKey: String,
     private val language: String
 ) {
 
     suspend fun addMovies(page: Int){
         if(localMovieDataSource.isEmpty()){
-            localMovieDataSource.addMovies(remoteMovieDataSource.getAllMovies(apiKey, language, page ))
+            val movies = remoteMovieDataSource.getAllMovies(apiKey, language, page )
+            localMovieDataSource.addMovies(movies)
+            movies.forEach {
+                actorRepository.addActorsByMovie(it.id)
+                genreRepository.addGenreByMovie(it.id)
+            }
         }
     }
 

@@ -15,7 +15,7 @@ import com.fernandodominguezpacheco.moviedb.framework.db.MovieWithActorsAndGenre
 
 //Movie
 fun MovieWithActorsAndGenres.toMovie() : Movie = Movie(
-    movie.id,
+    movie.movieId,
     movie.title,
     movie.original_language,
     movie.vote_average,
@@ -63,7 +63,7 @@ fun Movie.toRoomMovie(): RoomMovie = RoomMovie(
 
 //Actor
 fun RoomActor.toActor(): Actor = Actor(
-    id,
+    actorId,
     name,
     popularity,
     urlImage,
@@ -89,7 +89,7 @@ fun Actor.toRoomActor(): RoomActor = RoomActor(
 
 //Genre
 fun RoomGenre.toGenre(): Genre = Genre(
-    id,
+    genreId,
     name
 )
 
@@ -105,8 +105,8 @@ fun Genre.toRoomGenre(): RoomGenre = RoomGenre(
 
 //MovieActor
 fun MovieActor.toRoomMovieActor() : RoomMovieActor = RoomMovieActor(
-    idMovie,
-    idActor
+    movieId,
+    actorId
 )
 
 //MovieGenre
