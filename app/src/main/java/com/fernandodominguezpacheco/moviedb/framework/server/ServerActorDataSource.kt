@@ -10,15 +10,10 @@ import com.fernandodominguezpacheco.moviedb.framework.toActor
 import com.fernandodominguezpacheco.moviedb.framework.toGenre
 import com.fernandodominguezpacheco.moviedb.framework.toMovie
 
-class MoviesApiDataSource(
+class ServerActorDataSource(
     private val apiService: MoviesApiService
-) : RemoteMovieDataSource, RemoteActorDataSource,  RemoteGenreDataSource{
+) : RemoteActorDataSource{
 
-    override suspend fun getAllMovies(apiKey: String, language: String, page: Int): List<Movie> {
-        return apiService.getMovies(apiKey,language,page).map{
-            it.toMovie()
-        }
-    }
 
     override suspend fun getAllActorsByMovie(movieId: Int, apiKey: String): List<Actor> {
         return apiService.getActorsByMovie(movieId, apiKey).list.map{
@@ -26,11 +21,6 @@ class MoviesApiDataSource(
         }
     }
 
-    override suspend fun getAllGenresByMovie(movieId: Int, apiKey: String): List<Genre> {
-        return apiService.getGenresByMovie(movieId, apiKey).genres.map{
-            it.toGenre()
-        }
-    }
 
 
 }

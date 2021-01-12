@@ -1,7 +1,6 @@
 package com.fernandodominguezpacheco.moviedb.data.datasource
 
 import com.fernandodominguezpacheco.moviedb.domain.Actor
-import com.fernandodominguezpacheco.moviedb.domain.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface LocalActorDataSource {

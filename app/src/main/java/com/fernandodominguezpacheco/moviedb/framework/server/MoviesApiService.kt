@@ -27,5 +27,5 @@ interface MoviesApiService {
         @Query("api_key") api_key: String?,
         @Query("language") language: String? = "en-US",
         @Query("page") page: Int? = 1,
-    ) : List<Movie>
+    ) : MovieServerResult
 }

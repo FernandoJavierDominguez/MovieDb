@@ -37,13 +37,13 @@ fun ServerMovie.toMovie(): Movie = Movie(
     original_language,
     vote_average,
     vote_count,
-    imdbId,
+    imdbId ?:"",
     popularity,
-    homepage,
-    overview,
+    homepage ?: "",
+    overview ?: "",
     release_date,
     poster_path,
-    status
+    status ?: ""
 )
 
 fun Movie.toRoomMovie(): RoomMovie = RoomMovie(
@@ -74,7 +74,7 @@ fun ServerActor.toActor(): Actor = Actor(
     id,
     name,
     popularity,
-    profile_path,
+    profile_path?: "",
     character
 )
 
@@ -111,8 +111,8 @@ fun MovieActor.toRoomMovieActor() : RoomMovieActor = RoomMovieActor(
 
 //MovieGenre
 fun MovieGenre.toRoomMovieGenre() : RoomMovieGenre = RoomMovieGenre(
-    idMovie,
-    idGenre
+    movieId,
+    genreId
 )
 
 

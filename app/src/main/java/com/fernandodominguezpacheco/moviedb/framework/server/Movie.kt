@@ -9,13 +9,13 @@ data class Movie(
     @SerializedName("original_language") val original_language: String,
     @SerializedName("vote_average") val vote_average: Double,
     @SerializedName("vote_count") val vote_count: Int,
-    @SerializedName("imdbId") val imdbId: String,
+    @SerializedName("imdbId") val imdbId: String?,
     @SerializedName("popularity") val popularity: Double,
-    @SerializedName("homepage") val homepage: String,
-    @SerializedName("overview") val overview: String,
+    @SerializedName("homepage") val homepage: String?,
+    @SerializedName("overview") val overview: String?,
     @SerializedName("release_date") val release_date : Date,
     @SerializedName("poster_path") val poster_path: String,
-    @SerializedName("status") val status: String,
+    @SerializedName("status") val status: String?,
     @SerializedName("genres") val genres: List<Genre>
 ) {
 }

@@ -1,4 +1,4 @@
-package com.fernandodominguezpacheco.catlike.utils
+package com.fernandodominguezpacheco.moviedb.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -23,19 +23,8 @@ class NetworkUtils@Inject constructor(@ApplicationContext private val context: C
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                 else -> false
             }
-        } else {
-            connectivityManager.run {
-                connectivityManager.activeNetworkInfo?.run {
-                    result = when (type) {
-                        ConnectivityManager.TYPE_WIFI -> true
-                        ConnectivityManager.TYPE_MOBILE -> true
-                        ConnectivityManager.TYPE_ETHERNET -> true
-                        else -> false
-                    }
-
-                }
-            }
         }
+
 
         return result
     }

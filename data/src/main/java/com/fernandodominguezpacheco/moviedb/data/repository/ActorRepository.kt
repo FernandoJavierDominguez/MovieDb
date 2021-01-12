@@ -3,9 +3,7 @@ package com.fernandodominguezpacheco.moviedb.data.repository
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalActorDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalMovieActorDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.RemoteActorDataSource
-import com.fernandodominguezpacheco.moviedb.domain.Actor
 import com.fernandodominguezpacheco.moviedb.domain.MovieActor
-import kotlinx.coroutines.flow.Flow
 
 class ActorRepository(
     private val localActorDataSource: LocalActorDataSource,

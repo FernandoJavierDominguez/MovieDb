@@ -1,16 +1,13 @@
 package com.fernandodominguezpacheco.moviedb.framework.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface ActorDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addActors(actors: List<Actor>)
 
     @Query("SELECT * FROM Actor")

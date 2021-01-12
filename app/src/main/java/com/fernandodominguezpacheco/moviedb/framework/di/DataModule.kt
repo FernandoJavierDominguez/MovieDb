@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Named
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -21,15 +22,16 @@ class DataModule {
         localMovieGenreDataSource: LocalMovieGenreDataSource,
         actorRepository: ActorRepository,
         genreRepository: GenreRepository,
-        apiKey: String,
-        language: String ) = MovieRepository(localMovieDataSource, remoteMovieDataSource, localMovieActorDataSource, localMovieGenreDataSource, actorRepository, genreRepository, apiKey, language)
+        @Named("apiKey") apiKey: String,
+        @Named("language") language: String
+    ) = MovieRepository(localMovieDataSource, remoteMovieDataSource, localMovieActorDataSource, localMovieGenreDataSource, actorRepository, genreRepository, apiKey, language)
 
     @Provides
     fun actorRepositoryProvider(
         localActorDataSource: LocalActorDataSource,
         remoteActorDataSource: RemoteActorDataSource,
         localMovieActorDataSource: LocalMovieActorDataSource,
-        apiKey: String
+        @Named("apiKey") apiKey: String
     ) = ActorRepository(localActorDataSource, remoteActorDataSource,localMovieActorDataSource,apiKey)
 
     @Provides
@@ -37,7 +39,7 @@ class DataModule {
         localGenreDataSource: LocalGenreDataSource,
         remoteGenreDataSource: RemoteGenreDataSource,
         localMovieGenreDataSource: LocalMovieGenreDataSource,
-        apiKey: String
+        @Named("apiKey") apiKey: String
     ) = GenreRepository(localGenreDataSource, remoteGenreDataSource, localMovieGenreDataSource, apiKey)
 
 }

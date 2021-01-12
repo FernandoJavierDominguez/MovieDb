@@ -1,7 +1,6 @@
 package com.fernandodominguezpacheco.moviedb.data.datasource
 
 import com.fernandodominguezpacheco.moviedb.domain.Actor
-import kotlinx.coroutines.flow.Flow
 
 interface RemoteActorDataSource {
 

@@ -5,9 +5,12 @@ import androidx.room.Room
 import com.fernandodominguezpacheco.moviedb.BuildConfig
 import com.fernandodominguezpacheco.moviedb.data.datasource.*
 import com.fernandodominguezpacheco.moviedb.framework.db.*
-import com.fernandodominguezpacheco.moviedb.framework.server.MoviesApiDataSource
+import com.fernandodominguezpacheco.moviedb.framework.server.ServerMovieDataSource
 import com.fernandodominguezpacheco.moviedb.framework.server.MoviesApiService
+import com.fernandodominguezpacheco.moviedb.framework.server.ServerActorDataSource
+import com.fernandodominguezpacheco.moviedb.framework.server.ServerGenreDataSource
 import com.fernandodominguezpacheco.moviedb.utils.Constants
+import com.fernandodominguezpacheco.moviedb.utils.Constants.API_KEY
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +19,22 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class AppModule {
+
+    @Provides
+    @Singleton
+    @Named("apiKey")
+    fun apiKeyProvider(): String = API_KEY
+
+    @Provides
+    @Singleton
+    @Named("language")
+    fun languageProvider(): String = "en-US"
 
     //LOCAL
     @Provides
@@ -76,7 +90,15 @@ class AppModule {
         .run{ create(MoviesApiService::class.java) }
 
     @Provides
-    fun remoteMoviesDataSourceProvider(apiService: MoviesApiService) : RemoteMovieDataSource = MoviesApiDataSource(apiService)
+    fun remoteMovieDataSourceProvider(apiService: MoviesApiService) : RemoteMovieDataSource = ServerMovieDataSource(apiService)
+
+    @Provides
+    fun remoteActorDataSourceProvider(apiService: MoviesApiService) : RemoteActorDataSource = ServerActorDataSource(apiService)
+
+    @Provides
+    fun remoteGenreDataSourceProvider(apiService: MoviesApiService) : RemoteGenreDataSource = ServerGenreDataSource(apiService)
+
+
 
 
 }
