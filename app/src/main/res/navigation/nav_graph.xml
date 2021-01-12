@@ -19,5 +19,14 @@
         android:id="@+id/detailFragment"
         android:name="com.fernandodominguezpacheco.moviedb.ui.detail.DetailFragment"
         android:label="@string/detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorFragment"
+        android:name="com.fernandodominguezpacheco.moviedb.ui.actor.ActorFragment"
+        android:label="@string/Actor"
+        tools:layout="@layout/fragment_actor" />
 </navigation>

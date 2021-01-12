@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fernandodominguezpacheco.moviedb.R
 import com.fernandodominguezpacheco.moviedb.databinding.RowActorBinding
 import com.fernandodominguezpacheco.moviedb.domain.Actor
-import com.fernandodominguezpacheco.moviedb.domain.Movie
 import kotlin.properties.Delegates
 
 class ActorAdapter(
@@ -26,7 +25,9 @@ class ActorAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
-
+        holder.itemView.setOnClickListener{
+            listener(item)
+        }
     }
 
     override fun getItemCount(): Int = items.size
