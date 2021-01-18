@@ -17,7 +17,8 @@ class MovieViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-           movieRepository.addMovies(1)
+           //movieRepository.addMoviesWithActorsAndGenres(1)
+            movieRepository.addMovies(1)
         }
     }
 

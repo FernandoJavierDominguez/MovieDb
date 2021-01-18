@@ -3,7 +3,9 @@ package com.fernandodominguezpacheco.moviedb.data.repository
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalGenreDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalMovieGenreDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.RemoteGenreDataSource
+import com.fernandodominguezpacheco.moviedb.domain.Genre
 import com.fernandodominguezpacheco.moviedb.domain.MovieGenre
+import kotlinx.coroutines.flow.Flow
 
 class GenreRepository(
     private val localGenreDataSource: LocalGenreDataSource,
@@ -21,5 +23,7 @@ class GenreRepository(
         }
 
     }
+
+    //fun getGenresByMovie(movieId: Int) : Flow<List<Genre>> = localGenreDataSource.getAllGenresByMovie(movieId)
 
 }

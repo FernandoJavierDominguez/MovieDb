@@ -18,7 +18,7 @@ class MovieRepository(
     private val language: String
 ) {
 
-    suspend fun addMovies(page: Int){
+    suspend fun addMoviesWithActorsAndGenres(page: Int){
         if(localMovieDataSource.isEmpty()){
             val movies = remoteMovieDataSource.getAllMovies(apiKey, language, page )
             localMovieDataSource.addMovies(movies)
@@ -28,7 +28,15 @@ class MovieRepository(
             }
         }
     }
+    suspend fun addMovies(page: Int){
+        if(localMovieDataSource.isEmpty()){
+            localMovieDataSource.addMovies(remoteMovieDataSource.getAllMovies(apiKey,language,page))
+        }
+    }
 
     fun getAllMovies() : Flow<List<Movie>> = localMovieDataSource.getAllMoviesWithGenresAndActors()
+
+    fun getMovieById(movieId: Int) : Flow<Movie> = localMovieDataSource.getMovieByIdWithGenresAndActors(movieId)
+
 
 }

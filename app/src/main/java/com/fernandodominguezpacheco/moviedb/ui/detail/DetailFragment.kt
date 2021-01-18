@@ -25,6 +25,8 @@ class DetailFragment : Fragment() {
     private val detailViewModel: DetailViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
+    private var movieId = 0
+
     private val actorAdapter = ActorAdapter{
         sharedViewModel.selectActor(it)
         requireView().findNavController().navigate(R.id.action_detailFragment_to_actorFragment)
@@ -46,14 +48,19 @@ class DetailFragment : Fragment() {
         binding.actors.adapter = actorAdapter
         binding.genres.adapter = genreAdapter
 
-        observer(sharedViewModel.getSelectedMovie()){
-            with(binding){
-                urlImage.loadUrl("${Constants.BASE_IMAGE_URL}${it.urlImage}")
-                title.text = it.title
-                overview.text = it.overview
-                actorAdapter.items = it.actors
-                genreAdapter.items = it.genres
-            }
+        observer(sharedViewModel.getSelectedMovie()) {
+            detailViewModel.addActorsByMovie(it)
+            detailViewModel.addGenresByMovie(it)
+            movieId = it.id
+
+        }
+        observer(detailViewModel.movieItem){
+            val movie = it.find { it.id == movieId }
+            binding.urlImage.loadUrl("${Constants.BASE_IMAGE_URL}${movie?.urlImage}")
+            binding.title.text = movie?.title
+            binding.overview.text = movie?.overview
+            actorAdapter.items = movie!!.actors
+            genreAdapter.items = movie.genres
         }
     }
 

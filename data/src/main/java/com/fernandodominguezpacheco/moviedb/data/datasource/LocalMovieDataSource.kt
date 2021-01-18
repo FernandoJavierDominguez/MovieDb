@@ -8,6 +8,7 @@ interface LocalMovieDataSource {
     suspend fun addMovies(movies: List<Movie>)
     fun getAllMovies(): Flow<List<Movie>>
     fun getAllMoviesWithGenresAndActors(): Flow<List<Movie>>
+    fun getMovieByIdWithGenresAndActors(movieId: Int): Flow<Movie>
     suspend fun getMovieById(id: Int) : Movie
     suspend fun isEmpty() : Boolean
     suspend fun deleteAllMovies()

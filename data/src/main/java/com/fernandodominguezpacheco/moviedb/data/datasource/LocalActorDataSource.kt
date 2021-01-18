@@ -7,6 +7,7 @@ interface LocalActorDataSource {
 
     suspend fun addActors(actors: List<Actor>)
     fun getAllActors(): Flow<List<Actor>>
+    //fun getAllActorsByMovie(movieId: Int) : Flow<List<Actor>>
     fun getAllActorsWithMovies(): Flow<List<Actor>>
     suspend fun getActorById(id: Int) : Actor
     suspend fun isEmpty() : Boolean

@@ -29,6 +29,12 @@ class RoomMovieDataSource(db: MovieDb) : LocalMovieDataSource {
         }
     }
 
+    override fun getMovieByIdWithGenresAndActors(movieId: Int): Flow<Movie> {
+        return movieDao.getMovieByIdWithGenresAndGenre(movieId).map{
+            it.toMovie()
+        }
+    }
+
     override suspend fun getMovieById(id: Int): Movie {
         TODO("Not yet implemented")
     }

@@ -13,6 +13,7 @@ interface ActorDao {
     @Query("SELECT * FROM Actor")
     fun getAllActors() : Flow<List<Actor>>
 
+
     @Query("SELECT COUNT(actorId) FROM Actor")
     suspend fun actorCount() : Int
 

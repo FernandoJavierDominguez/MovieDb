@@ -3,7 +3,10 @@ package com.fernandodominguezpacheco.moviedb.data.repository
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalActorDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.LocalMovieActorDataSource
 import com.fernandodominguezpacheco.moviedb.data.datasource.RemoteActorDataSource
+import com.fernandodominguezpacheco.moviedb.domain.Actor
 import com.fernandodominguezpacheco.moviedb.domain.MovieActor
+import kotlinx.coroutines.flow.Flow
+import sun.rmi.runtime.Log
 
 class ActorRepository(
     private val localActorDataSource: LocalActorDataSource,
@@ -21,6 +24,6 @@ class ActorRepository(
         }
     }
 
-
+    //fun getActorsByMovie(movieId: Int) : Flow<List<Actor>> =  localActorDataSource.getAllActorsByMovie(movieId)
 
 }
