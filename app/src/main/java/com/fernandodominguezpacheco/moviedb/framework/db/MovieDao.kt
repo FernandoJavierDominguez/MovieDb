@@ -18,6 +18,8 @@ interface MovieDao {
     @Query("SELECT COUNT(movieId) FROM Movie")
     suspend fun movieCount() : Int
 
+    @Transaction @Query("SELECT * FROM Movie WHERE title LIKE  '%' ||  :text  ||  '%'  ")
+    fun getAllMoviesWithActorsAndGenreBySearch(text: String): Flow<List<MovieWithActorsAndGenres>>
 
 
 }

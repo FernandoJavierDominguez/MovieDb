@@ -12,5 +12,5 @@ interface LocalMovieDataSource {
     suspend fun getMovieById(id: Int) : Movie
     suspend fun isEmpty() : Boolean
     suspend fun deleteAllMovies()
-
+    fun getAllMoviesWithGenresAndActorsBySearch(text: String): Flow<List<Movie>>
 }

@@ -1,13 +1,12 @@
 package com.fernandodominguezpacheco.moviedb.ui.movie
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.fernandodominguezpacheco.moviedb.R
 import com.fernandodominguezpacheco.moviedb.databinding.RowMovieBinding
 import com.fernandodominguezpacheco.moviedb.domain.Movie
-
 import com.fernandodominguezpacheco.moviedb.utils.Constants.BASE_IMAGE_URL
 import com.fernandodominguezpacheco.moviedb.utils.loadUrl
 import kotlin.properties.Delegates
@@ -16,6 +15,7 @@ import kotlin.properties.Delegates
 class MovieAdapter(
     private val listener: (Movie) -> Unit
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+
 
     var items: List<Movie> by Delegates.observable(mutableListOf()) {_,_,_ -> notifyDataSetChanged()}
 
@@ -46,9 +46,7 @@ class MovieAdapter(
                 title.text = movieItem.title
                 popularity.text = movieItem.popularity.toString()
             }
-
         }
-
-
     }
+
 }

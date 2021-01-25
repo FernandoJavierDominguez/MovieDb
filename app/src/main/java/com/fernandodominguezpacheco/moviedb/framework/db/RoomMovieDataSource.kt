@@ -44,4 +44,10 @@ class RoomMovieDataSource(db: MovieDb) : LocalMovieDataSource {
     override suspend fun deleteAllMovies() {
         TODO("Not yet implemented")
     }
+
+    override fun getAllMoviesWithGenresAndActorsBySearch(text: String): Flow<List<Movie>> = movieDao.getAllMoviesWithActorsAndGenreBySearch(text).map {
+        movies -> movies.map {
+            it.toMovie()
+        }
+    }
 }

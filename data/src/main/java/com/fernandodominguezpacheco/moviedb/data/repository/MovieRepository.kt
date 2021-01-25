@@ -36,6 +36,9 @@ class MovieRepository(
 
     fun getAllMovies() : Flow<List<Movie>> = localMovieDataSource.getAllMoviesWithGenresAndActors()
 
+    fun getMoviesBySearch(text: String) : Flow<List<Movie>> = localMovieDataSource.getAllMoviesWithGenresAndActorsBySearch(text)
+
+
     fun getMovieById(movieId: Int) : Flow<Movie> = localMovieDataSource.getMovieByIdWithGenresAndActors(movieId)
 
 
