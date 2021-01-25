@@ -1,5 +1,6 @@
 package com.fernandodominguezpacheco.moviedb.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,22 +8,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.fernandodominguezpacheco.moviedb.MovieApp
 import com.fernandodominguezpacheco.moviedb.R
 import com.fernandodominguezpacheco.moviedb.databinding.FragmentDetailBinding
 import com.fernandodominguezpacheco.moviedb.utils.Constants
 import com.fernandodominguezpacheco.moviedb.utils.SharedViewModel
 import com.fernandodominguezpacheco.moviedb.utils.loadUrl
 import com.fernandodominguezpacheco.moviedb.utils.observer
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val detailViewModel: DetailViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val detailViewModel: DetailViewModel by viewModels{viewModelFactory}
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var movieId = 0
@@ -38,7 +44,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -67,6 +73,11 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onAttach(context: Context) {
+        (context.applicationContext as MovieApp).getComponent().inject(this)
+        super.onAttach(context)
     }
 
 

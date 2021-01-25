@@ -1,22 +1,15 @@
 package com.fernandodominguezpacheco.moviedb
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Adapter
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.fernandodominguezpacheco.moviedb.databinding.ActivityMainBinding
-import com.fernandodominguezpacheco.moviedb.ui.movie.MovieFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
+import com.fernandodominguezpacheco.moviedb.framework.di.MovieDbComponent
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

@@ -6,12 +6,9 @@ import com.fernandodominguezpacheco.moviedb.data.repository.GenreRepository
 import com.fernandodominguezpacheco.moviedb.data.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Named
 
 @Module
-@InstallIn(ApplicationComponent::class)
 class DataModule {
 
     @Provides

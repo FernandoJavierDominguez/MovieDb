@@ -1,28 +1,34 @@
 package com.fernandodominguezpacheco.moviedb.ui.movie
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.fernandodominguezpacheco.moviedb.MovieApp
 import com.fernandodominguezpacheco.moviedb.R
 import com.fernandodominguezpacheco.moviedb.databinding.FragmentMovieBinding
-import com.fernandodominguezpacheco.moviedb.ui.movie.MovieAdapter
-import com.fernandodominguezpacheco.moviedb.ui.movie.MovieViewModel
 import com.fernandodominguezpacheco.moviedb.utils.SharedViewModel
 import com.fernandodominguezpacheco.moviedb.utils.observer
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.*
+import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class MovieFragment : Fragment() {
 
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
 
-    private val movieViewModel: MovieViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val movieViewModel: MovieViewModel by viewModels{ viewModelFactory }
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     val adapter = MovieAdapter{
@@ -34,11 +40,12 @@ class MovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMovieBinding.inflate(layoutInflater)
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMovieBinding.bind(view)
@@ -74,7 +81,7 @@ class MovieFragment : Fragment() {
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        movieViewModel.text.value = newText!!.toLowerCase()
+                        movieViewModel.text.value = newText!!.toLowerCase(Locale.ROOT)
                         return false
                     }
                 })
@@ -82,5 +89,10 @@ class MovieFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        (context.applicationContext as MovieApp).getComponent().inject(this)
+        super.onAttach(context)
     }
 }
