@@ -19,4 +19,5 @@ interface MovieDbComponent {
     fun inject(movieFragment: MovieFragment)
     fun inject(detailFragment: DetailFragment)
     fun inject(actorFragment: ActorFragment)
+
 }

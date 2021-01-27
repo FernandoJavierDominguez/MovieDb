@@ -7,13 +7,15 @@ import com.fernandodominguezpacheco.moviedb.data.repository.ActorRepository
 import com.fernandodominguezpacheco.moviedb.data.repository.GenreRepository
 import com.fernandodominguezpacheco.moviedb.data.repository.MovieRepository
 import com.fernandodominguezpacheco.moviedb.domain.Movie
+import com.fernandodominguezpacheco.moviedb.utils.NetworkUtils
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailViewModel @Inject  constructor(
     private val actorRepository: ActorRepository,
     private val genreRepository: GenreRepository,
-    movieRepository: MovieRepository
+    movieRepository: MovieRepository,
+    private val  networkUtils: NetworkUtils
 ) : ViewModel() {
 
     var movieId = 0
@@ -22,13 +24,17 @@ class DetailViewModel @Inject  constructor(
 
     fun addActorsByMovie(movie: Movie){
         viewModelScope.launch {
-            actorRepository.addActorsByMovie(movie.id)
+            if(networkUtils.isInternetAvailable()) {
+                actorRepository.addActorsByMovie(movie.id)
+            }
         }
 
     }
     fun addGenresByMovie(movie: Movie){
         viewModelScope.launch {
-            genreRepository.addGenreByMovie(movie.id)
+            if(networkUtils.isInternetAvailable()) {
+                genreRepository.addGenreByMovie(movie.id)
+            }
         }
     }
 
