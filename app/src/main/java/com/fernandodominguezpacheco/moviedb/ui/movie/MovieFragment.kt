@@ -50,6 +50,11 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMovieBinding.bind(view)
         binding.list.adapter = adapter
+        postponeEnterTransition()
+        binding.list.viewTreeObserver.addOnPreDrawListener {
+            startPostponedEnterTransition()
+            true
+        }
         binding.list.layoutManager = GridLayoutManager(context, 2)
         observer(movieViewModel.movieItems){
             adapter.items = it
