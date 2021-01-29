@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
-
+    private val  networkUtils: NetworkUtils
 ) : ViewModel() {
 
     //val movieItems = getAllMovies.invoke().asLiveData()
@@ -31,8 +31,9 @@ class MovieViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-           //movieRepository.addMoviesWithActorsAndGenres(1)
-            movieRepository.addMovies(1)
+            if(networkUtils.isInternetAvailable()) {
+                movieRepository.addMovies(1)
+            }
         }
     }
 
