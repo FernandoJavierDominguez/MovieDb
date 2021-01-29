@@ -1,8 +1,6 @@
 package com.fernandodominguezpacheco.moviedb.ui.movie
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.fernandodominguezpacheco.moviedb.data.repository.MovieRepository
 import com.fernandodominguezpacheco.moviedb.usecases.GetAllMovies
 import com.fernandodominguezpacheco.moviedb.utils.NetworkUtils
@@ -19,6 +17,11 @@ class MovieViewModel @Inject constructor(
 
     //val movieItems = getAllMovies.invoke().asLiveData()
     val text = MutableStateFlow("")
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> get() = _message
+
+
+
 
 
     @ExperimentalCoroutinesApi
@@ -33,6 +36,9 @@ class MovieViewModel @Inject constructor(
         viewModelScope.launch {
             if(networkUtils.isInternetAvailable()) {
                 movieRepository.addMovies(1)
+            }
+            else{
+                _message.value = "No Internet Avalaible"
             }
         }
     }

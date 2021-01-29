@@ -59,6 +59,9 @@ class MovieFragment : Fragment() {
         observer(movieViewModel.movieItems){
             adapter.items = it
         }
+        observer(movieViewModel.message){
+            binding.message.text = it
+        }
         setHasOptionsMenu(true)
 
     }
